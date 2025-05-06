@@ -33,6 +33,10 @@ function renderServices() {
     radio.value = service.id;
     radio.required = true;
     
+    radio.addEventListener('change', function() {
+      console.log('Выбрана услуга:', service.name, 'ID:', service.id);
+    });
+    
     const title = document.createElement('h5');
     title.textContent = service.name;
     
@@ -126,9 +130,23 @@ function setupForm() {
     e.preventDefault();
     
     // Проверка выбора услуги
-    const serviceId = form.querySelector('input[name="service"]:checked');
-    if (!serviceId) {
+    const serviceInputs = document.querySelectorAll('input[name="service"]');
+    let selectedService = null;
+    
+    serviceInputs.forEach(input => {
+      if (input.checked) {
+        selectedService = input;
+      }
+    });
+
+    if (!selectedService) {
       alert('Пожалуйста, выберите услугу!');
+      return;
+    }
+
+    const service = services.find(s => s.id == selectedService.value);
+    if (!service) {
+      alert('Ошибка: выбранная услуга не найдена');
       return;
     }
 
@@ -137,7 +155,6 @@ function setupForm() {
       return;
     }
 
-    const service = services.find(s => s.id == serviceId.value);
     const format = form.querySelector('input[name="format"]:checked').value;
     const address = (format === 'home' && selectedCoords) ? `Координаты: ${selectedCoords[0].toFixed(6)}, ${selectedCoords[1].toFixed(6)}` : 'В студии';
     const firstName = form.firstName.value.trim();
