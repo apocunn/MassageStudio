@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мастерская массажа</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo-block">
+      <img src="logo.png" alt="Логотип" class="logo">
+      <h1>Мастерская массажа</h1>
+    </div>
+    <p class="subtitle">Забота о вашем здоровье и комфорте</p>
+  </header>
+
+  <main>
+    <section class="services-section">
+      <h2>Выберите услугу</h2>
+      <div id="services" class="services-list"></div>
+    </section>
+
+    <section class="format-section">
+      <h2>Формат услуги</h2>
+      <div class="format-options">
+        <label><input type="radio" name="format" value="studio" checked> В студии</label>
+        <label><input type="radio" name="format" value="home"> На дому <span class="extra-charge">+500₽</span></label>
+      </div>
+      <div id="address-block" class="address-block">
+        <h3>Укажите адрес</h3>
+        <div id="map"></div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2>Ваши данные</h2>
+      <form id="orderForm" autocomplete="off">
+        <div class="form-row">
+          <input type="text" name="firstName" placeholder="Имя" required>
+          <input type="text" name="lastName" placeholder="Фамилия" required>
+        </div>
+        <div class="form-row">
+          <input type="tel" name="phone" placeholder="Телефон" required pattern="[+0-9\-() ]{7,}">
+          <select name="messenger" required>
+            <option value="">Мессенджер для связи</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="telegram">Telegram</option>
+            <option value="viber">Viber</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Записаться</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Мастерская массажа</p>
+  </footer>
+
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  <script src="script.js"></script>
+</body>
+</html>
