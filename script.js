@@ -24,14 +24,31 @@ function renderServices() {
   const servicesDiv = document.getElementById('services');
   servicesDiv.innerHTML = '';
   services.forEach(service => {
-    servicesDiv.innerHTML += `
-      <label class="service-card">
-        <input type="radio" name="service" value="${service.id}" required>
-        <h5>${service.name}</h5>
-        <p>${service.desc}</p>
-        <div class="price">${service.price}₽</div>
-      </label>
-    `;
+    const serviceCard = document.createElement('label');
+    serviceCard.className = 'service-card';
+    
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'service';
+    radio.value = service.id;
+    radio.required = true;
+    
+    const title = document.createElement('h5');
+    title.textContent = service.name;
+    
+    const desc = document.createElement('p');
+    desc.textContent = service.desc;
+    
+    const price = document.createElement('div');
+    price.className = 'price';
+    price.textContent = `${service.price}₽`;
+    
+    serviceCard.appendChild(radio);
+    serviceCard.appendChild(title);
+    serviceCard.appendChild(desc);
+    serviceCard.appendChild(price);
+    
+    servicesDiv.appendChild(serviceCard);
   });
 }
 
