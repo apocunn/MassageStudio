@@ -72,16 +72,54 @@ function setupMap() {
   });
 }
 
+// --- Валидация полей формы ---
+function validateForm(form) {
+  const firstName = form.firstName.value.trim();
+  const lastName = form.lastName.value.trim();
+  const phone = form.phone.value.trim();
+
+  // Проверка имени
+  if (!/^[А-Яа-яЁё]{2,}$/.test(firstName)) {
+    alert('Имя должно содержать минимум 2 буквы и только русские буквы');
+    form.firstName.focus();
+    return false;
+  }
+
+  // Проверка фамилии
+  if (!/^[А-Яа-яЁё]{2,}$/.test(lastName)) {
+    alert('Фамилия должна содержать минимум 2 буквы и только русские буквы');
+    form.lastName.focus();
+    return false;
+  }
+
+  // Проверка телефона
+  if (!/^\+7[0-9]{10}$/.test(phone)) {
+    alert('Номер телефона должен начинаться с +7 и содержать 11 цифр');
+    form.phone.focus();
+    return false;
+  }
+
+  return true;
+}
+
 // --- Отправка формы в Telegram ---
 function setupForm() {
   const form = document.getElementById('orderForm');
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    
+    // Проверка выбора услуги
     const serviceId = form.querySelector('input[name="service"]:checked');
     if (!serviceId) {
       alert('Пожалуйста, выберите услугу!');
       return;
     }
+
+    // Валидация полей формы
+    if (!validateForm(form)) {
+      return;
+    }
+
     const service = services.find(s => s.id == serviceId.value);
     const format = form.querySelector('input[name="format"]:checked').value;
     const address = (format === 'home' && selectedCoords) ? `Координаты: ${selectedCoords[0].toFixed(6)}, ${selectedCoords[1].toFixed(6)}` : 'В студии';

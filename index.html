@@ -40,11 +40,17 @@
       <h2>Ваши данные</h2>
       <form id="orderForm" autocomplete="off">
         <div class="form-row">
-          <input type="text" name="firstName" placeholder="Имя" required>
-          <input type="text" name="lastName" placeholder="Фамилия" required>
+          <input type="text" name="firstName" placeholder="Имя (например: Иван)" required 
+                 pattern="[А-Яа-яЁё]{2,}" 
+                 title="Имя должно содержать минимум 2 буквы, только русские буквы">
+          <input type="text" name="lastName" placeholder="Фамилия (например: Иванов)" required 
+                 pattern="[А-Яа-яЁё]{2,}" 
+                 title="Фамилия должна содержать минимум 2 буквы, только русские буквы">
         </div>
         <div class="form-row">
-          <input type="tel" name="phone" placeholder="Телефон" required pattern="[+0-9\-() ]{7,}">
+          <input type="tel" name="phone" placeholder="Телефон (например: +79991234567)" required 
+                 pattern="\+7[0-9]{10}" 
+                 title="Номер должен начинаться с +7 и содержать 11 цифр">
         </div>
         <div class="messenger-options">
           <h3>Выберите мессенджеры для связи</h3>
