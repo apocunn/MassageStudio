@@ -126,6 +126,11 @@ function validateForm(form) {
 // --- Отправка формы в Telegram ---
 function setupForm() {
   const form = document.getElementById('orderForm');
+  if (!form) {
+    console.error('Форма не найдена!');
+    return;
+  }
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -155,12 +160,17 @@ function setupForm() {
       return;
     }
 
-    const format = form.querySelector('input[name="format"]:checked').value;
+    const formatInput = document.querySelector('input[name="format"]:checked');
+    if (!formatInput) {
+      alert('Пожалуйста, выберите формат услуги!');
+      return;
+    }
+    const format = formatInput.value;
     const address = (format === 'home' && selectedCoords) ? `Координаты: ${selectedCoords[0].toFixed(6)}, ${selectedCoords[1].toFixed(6)}` : 'В студии';
     const firstName = form.firstName.value.trim();
     const lastName = form.lastName.value.trim();
     const phone = form.phone.value.trim();
-    const messengers = Array.from(form.querySelectorAll('input[name="messenger"]:checked'))
+    const messengers = Array.from(document.querySelectorAll('input[name="messenger"]:checked'))
       .map(input => input.value)
       .join(', ');
 
