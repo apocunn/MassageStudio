@@ -155,11 +155,42 @@ function setupForm() {
       return;
     }
 
-    // Валидация полей формы
-    if (!validateForm(form)) {
+    // Получаем значения полей формы
+    const firstNameInput = document.querySelector('input[name="firstName"]');
+    const lastNameInput = document.querySelector('input[name="lastName"]');
+    const phoneInput = document.querySelector('input[name="phone"]');
+    
+    if (!firstNameInput || !lastNameInput || !phoneInput) {
+      console.error('Не найдены необходимые поля формы');
       return;
     }
 
+    const firstName = firstNameInput.value.trim();
+    const lastName = lastNameInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    // Проверка имени
+    if (!/^[А-Яа-яЁё]{2,}$/.test(firstName)) {
+      alert('Имя должно содержать минимум 2 буквы и только русские буквы');
+      firstNameInput.focus();
+      return;
+    }
+
+    // Проверка фамилии
+    if (!/^[А-Яа-яЁё]{2,}$/.test(lastName)) {
+      alert('Фамилия должна содержать минимум 2 буквы и только русские буквы');
+      lastNameInput.focus();
+      return;
+    }
+
+    // Проверка телефона
+    if (!/^\+7[0-9]{10}$/.test(phone)) {
+      alert('Номер телефона должен начинаться с +7 и содержать 11 цифр');
+      phoneInput.focus();
+      return;
+    }
+
+    // Проверка формата услуги
     const formatInput = document.querySelector('input[name="format"]:checked');
     if (!formatInput) {
       alert('Пожалуйста, выберите формат услуги!');
@@ -167,9 +198,8 @@ function setupForm() {
     }
     const format = formatInput.value;
     const address = (format === 'home' && selectedCoords) ? `Координаты: ${selectedCoords[0].toFixed(6)}, ${selectedCoords[1].toFixed(6)}` : 'В студии';
-    const firstName = form.firstName.value.trim();
-    const lastName = form.lastName.value.trim();
-    const phone = form.phone.value.trim();
+
+    // Проверка мессенджеров
     const messengers = Array.from(document.querySelectorAll('input[name="messenger"]:checked'))
       .map(input => input.value)
       .join(', ');
@@ -192,9 +222,8 @@ function setupForm() {
       `Мессенджеры: ${messengers}`;
 
     // --- Отправка в Telegram ---
-    // Вставьте ваш токен и chat_id ниже:
-    const token = '8025849467:AAFTzPSgCcZt8vpEwoPt5ngP_3jmF1C0oFE'; // <-- ВСТАВЬТЕ СЮДА
-    const chat_id = '1747577985';  // <-- ВСТАВЬТЕ СЮДА
+    const token = '8025849467:AAFTzPSgCcZt8vpEwoPt5ngP_3jmF1C0oFE';
+    const chat_id = '1747577985';
     const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}`;
 
     try {
