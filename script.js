@@ -183,8 +183,8 @@ function setupForm() {
 
     // --- Отправка в Telegram ---
     // Вставьте ваш токен и chat_id ниже:
-    const token = 'ВАШ_ТОКЕН_БОТА'; // <-- ВСТАВЬТЕ СЮДА
-    const chat_id = 'ВАШ_CHAT_ID';  // <-- ВСТАВЬТЕ СЮДА
+    const token = '8025849467:AAFTzPSgCcZt8vpEwoPt5ngP_3jmF1C0oFE'; // <-- ВСТАВЬТЕ СЮДА
+    const chat_id = '1747577985';  // <-- ВСТАВЬТЕ СЮДА
     const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}`;
 
     try {
