@@ -52,8 +52,8 @@ function setupMap() {
   if (!window.ymaps) return;
   ymaps.ready(function () {
     const map = new ymaps.Map('map', {
-      center: [55.76, 37.64],
-      zoom: 10
+      center: [53.7572, 87.1364],
+      zoom: 12
     });
     let placemark;
     map.events.add('click', function (e) {
@@ -88,7 +88,14 @@ function setupForm() {
     const firstName = form.firstName.value.trim();
     const lastName = form.lastName.value.trim();
     const phone = form.phone.value.trim();
-    const messenger = form.messenger.value;
+    const messengers = Array.from(form.querySelectorAll('input[name="messenger"]:checked'))
+      .map(input => input.value)
+      .join(', ');
+
+    if (messengers.length === 0) {
+      alert('Пожалуйста, выберите хотя бы один мессенджер для связи!');
+      return;
+    }
 
     // --- Сбор сообщения ---
     const text =
@@ -100,7 +107,7 @@ function setupForm() {
       `Имя: ${firstName}%0A` +
       `Фамилия: ${lastName}%0A` +
       `Телефон: ${phone}%0A` +
-      `Мессенджер: ${messenger}`;
+      `Мессенджеры: ${messengers}`;
 
     // --- Отправка в Telegram ---
     // Вставьте ваш токен и chat_id ниже:

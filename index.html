@@ -45,12 +45,14 @@
         </div>
         <div class="form-row">
           <input type="tel" name="phone" placeholder="Телефон" required pattern="[+0-9\-() ]{7,}">
-          <select name="messenger" required>
-            <option value="">Мессенджер для связи</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="telegram">Telegram</option>
-            <option value="viber">Viber</option>
-          </select>
+        </div>
+        <div class="messenger-options">
+          <h3>Выберите мессенджеры для связи</h3>
+          <div class="messenger-checkboxes">
+            <label><input type="checkbox" name="messenger" value="whatsapp"> WhatsApp</label>
+            <label><input type="checkbox" name="messenger" value="telegram"> Telegram</label>
+            <label><input type="checkbox" name="messenger" value="viber"> Viber</label>
+          </div>
         </div>
         <button type="submit" class="submit-btn">Записаться</button>
       </form>
